@@ -1,20 +1,7 @@
-from config import db
+package sala
 
-class Sala(db.Model):
-    __tablename__ = "salas"
-
-    sala_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    recursos = db.Column(db.String(100), nullable=False)
-    ativo = db.Column(db.Boolean, default=True)
-
-    def __init__(self, recursos, ativo=True):
-        self.recursos = recursos
-        self.ativo = ativo
-
-    def to_dict(self):
-        return {
-            'sala_id': self.sala_id,
-            'recursos': self.recursos,
-            'ativo': self.ativo,
-        }
-
+type Sala struct {
+    SalaID   uint   `json:"sala_id" gorm:"primaryKey;autoIncrement"`   // ID primário gerado automatico
+    Recursos string `json:"recursos" gorm:"type:varchar(100);not null"`// Campo obrigatório com até 100 caracteres
+    Ativo    bool   `json:"ativo" gorm:"default:true"`                 // Booleano com valor padrão true
+}

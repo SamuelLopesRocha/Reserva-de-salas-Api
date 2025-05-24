@@ -1,16 +1,19 @@
-import os
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_cors import CORS
+package main
 
-app = Flask(__name__)
-CORS(app)
-app.config['HOST'] = '0.0.0.0'
-app.config['PORT']= 6000
-app.config['DEBUG'] = True
+import (
+    "gorm.io/driver/sqlite"
+    "gorm.io/gorm"
+    "meuprojeto/models"
+)
 
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///app.db"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+var DB *gorm.DB
 
+func ConnectDatabase() {
+    database, err := gorm.Open(sqlite.Open("banco.db"), &gorm.Config{})
+    if err != nil {
+        panic("Erro ao conectar ao banco")
+    }
 
-db = SQLAlchemy(app)
+    database.AutoMigrate(&models.Sala{})
+    DB = database
+}

@@ -1,27 +1,17 @@
-/*
-python -m venv *nome do ambiente*
-nome do ambienteScripts/Activate
-pip install flask
-pip install requests
-*/
+package main
 
-import os
-from config import app,db
-from alunos.alunos_route import alunos_blueprint
-from professores.professores_route import professor_blueprint
-from turmas.turmas_route import turma_blueprint, reseta_blueprint, resetaTurma_blueprint
+import (
+    "RESERVA-DE-SALAS-API/sala"
+    "github.com/gin-gonic/gin"
+)
 
+func main() {
+    config.ConnectDatabase()
 
-configure_swagger(app)
+    r := gin.Default()
 
-with app.app_context():
-    db.create_all()
+    // Ativar rotas de sala
+    routes.SalaRoutes(r)
 
-if __name__ == '__main__':
-  app.run(
-        host=app.config["HOST"],
-        port = app.config['PORT'],
-        debug=app.config['DEBUG'],
-        
-    )
-
+    r.Run(":6000")
+}
